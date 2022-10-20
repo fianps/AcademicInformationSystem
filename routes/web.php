@@ -38,3 +38,4 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 // make route to ProfilController
 Route::get('/edit-profil', [ProfilController::class, 'index'])->middleware('auth');
+Route::post('/edit-profil/{id}', [ProfilController::class, 'update'])->middleware('auth');

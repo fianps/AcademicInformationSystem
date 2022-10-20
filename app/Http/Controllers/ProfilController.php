@@ -12,33 +12,74 @@ class ProfilController extends Controller
     //make view to edit profil
     public function index()
     {
-        return view('operator',[
-            'users' => DB::table('users')->get(),
-            'title' => 'PPL',
-            'operators' => DB::table('operators')->get(),
+        return view('editprof.edit-profil',[
+            // make variable to get operator data
+            'operator' => DB::table('operators')->where('id', auth()->user()->id)->first(),
+            
+            // 'users' => DB::table('users')->get(),
+            'title' => 'Edit Prof',
+            // 'operators' => Operator::table('operators')->get(),
         ]);
     }
 
     // make create form method
 
 
-    //make update method
-    public function update(Request $request)
+    //make edit method to update operator table
+    // public function update(Request $request, $id)
+    // {
+    //     // make variable to get operator data
+    //     $operator = Operator::find($id);
+    //     // make variable to get user data
+    //     $user = User::find($id);
+
+    //     // make variable to get request data
+    //     $request->validate([
+    //         'name' => 'required',
+    //         'email' => 'required',
+    //         'password' => 'required',
+    //         'alamat' => 'required',
+    //         'no_telp' => 'required',
+    //         'foto' => 'required',
+    //     ]);
+
+    //     // make variable to get request data
+    //     $operator->name = $request->name;
+    //     $user->email = $request->email;
+    //     $user->password = $request->password;
+    //     $operator->alamat = $request->alamat;
+    //     $operator->no_telp = $request->no_telp;
+    //     $operator->foto = $request->foto;
+
+    //     // save data to database
+    //     $operator->save();
+    //     $user->save();
+
+    //     // redirect to operator page
+    //     return redirect('/operator');
+    // }
+
+
+    public function update(Request $request, $id)
     {
-        // validate data
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'nip' => 'required|min:5|max:20',
-            'email' => 'required|email:dns|unique:users',
-            'password' => 'required|min:5|max:20'
+        $operator = Operator::find($id);
+
+        $request->validate([
+            'nama' => 'required',
+            'nip' => 'required',
+            'email' => 'required',
+            'no_hp' => 'required',
+            'alamat' => 'required',
         ]);
 
-        // encrypt password
-        $validatedData['password'] = bcrypt($validatedData['password']);
+        $operator->nama = $request->nama;
+        $operator->nip = $request->nip;
+        $operator->email = $request->email;
+        $operator->no_hp = $request->no_hp;
+        $operator->alamat = $request->alamat;
+        
+        $operator->save();
 
-        Operator::create($validatedData);
-
-        // redirect to login page
-        return redirect('/login')->with('success','Register success, please login');
+        return redirect('/')->with('status', 'Data Operator Berhasil Diubah!');
     }
 }
