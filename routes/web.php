@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,5 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 // make route to ProfilController
 Route::get('/edit-profil', [ProfilController::class, 'index'])->middleware('auth');
+
+Route::get('/dashboard', [DashboardController::class, 'index']);

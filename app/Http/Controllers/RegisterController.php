@@ -10,7 +10,7 @@ class RegisterController extends Controller
     // make index method
     public function index()
     {
-        return view('register.index',[
+        return view('auth.signup',[
             'title' => 'Register',
             'active' => 'register'
         ]);
