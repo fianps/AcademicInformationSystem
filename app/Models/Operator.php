@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Operator extends Model
 {
     use HasFactory;
+
+    // create fillable
+    protected $fillable = [
+        'no_hp',
+        'alamat',
+    ];
 }

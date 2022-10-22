@@ -12,13 +12,9 @@ class ProfilController extends Controller
     //make view to edit profil
     public function index()
     {
-        return view('editprof.edit-profil',[
-            // make variable to get operator data
-            'operator' => DB::table('operators')->where('id', auth()->user()->id)->first(),
-            
-            // 'users' => DB::table('users')->get(),
-            'title' => 'Edit Prof',
-            // 'operators' => Operator::table('operators')->get(),
+        return view('edit.edit-profil',[
+            'title' => 'Edit Profil',
+            'operator' => Operator::where('id', auth()->user()->id)->first(),
         ]);
     }
 
@@ -65,20 +61,27 @@ class ProfilController extends Controller
         $operator = Operator::find($id);
 
         $request->validate([
-            'nama' => 'required',
-            'nip' => 'required',
-            'email' => 'required',
+            // 'nama' => 'required',
+            // 'nip' => 'required',
+            // 'email' => 'required',
             'no_hp' => 'required',
             'alamat' => 'required',
         ]);
 
-        $operator->nama = $request->nama;
-        $operator->nip = $request->nip;
-        $operator->email = $request->email;
-        $operator->no_hp = $request->no_hp;
-        $operator->alamat = $request->alamat;
+        // $operator->nama = $request->nama;
+        // $operator->nip = $request->nip;
+        // $operator->email = $request->email;
+        // $operator->no_hp = $request->no_hp;
+        // $operator->alamat = $request->alamat;
         
-        $operator->save();
+        $operator->update([
+            // 'nama' => $request->nama,
+            // 'nip' => $request->nip,
+            // 'email' => $request->email,
+            'no_hp' => $request->no_hp,
+            'alamat' => $request->alamat,
+        ]);
+        
 
         return redirect('/')->with('status', 'Data Operator Berhasil Diubah!');
     }

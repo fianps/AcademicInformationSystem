@@ -25,20 +25,25 @@
               <div class="card">
                   <div class="card-body">
                       {{--make form to edit--}}
-                      <form action="/edit-profil/{{ $operator->id }}" method="post">
+                      <form action="/edit-mahasiswa/{{$mahasiswa->id}}" method="post">
+                          @method('put')
                           @csrf
                           <div class="mb-3">
                               <label for="nama" class="form-label">Nama</label>
-                              <input disabled type="text" class="form-control" id="nama" name="nama" value="{{ $operator->nama }}">
+                              <input disabled type="text" class="form-control" id="nama" name="nama" value="{{ $mahasiswa->nama }}">
                           </div>
                           <div class="mb-3">
-                              <label for="nip" class="form-label">NIP</label>
-                              <input disabled type="text" class="form-control" id="nip" name="nip" value="{{ $operator->nip }}">
+                              <label for="nim" class="form-label">NIM</label>
+                              <input disabled type="text" class="form-control" id="nim" name="nim" value="{{ $mahasiswa->nim }}">
                           </div>
                           <div class="mb-3">
                               <label for="email" class="form-label">Email</label>
-                              <input disabled type="text" class="form-control" id="email" name="email" value="{{ $operator->email }}">
+                              <input type="text" class="form-control" id="email" name="email">
                           </div>
+                          <div class="mb-3">
+                            <label for="angkatan" class="form-label">Angkatan</label>
+                            <input type="text" class="form-control" id="angkatan" name="angkatan">
+                        </div>
                           <div class="mb-3">
                               <label for="no_hp" class="form-label">No. Telepon</label>
                               <input type="text" class="form-control" id="no_hp" name="no_hp" >
@@ -47,7 +52,7 @@
                               <label for="alamat" class="form-label">Alamat</label>
                               <input type="text" class="form-control" id="alamat" name="alamat" >
                           </div>
-                          <button type="submit" class="btn btn-primary">Edit</button>
+                          <button type="submit" class="btn btn-primary">Update</button>
                       </form>
                   </div>
               </div>
@@ -55,8 +60,3 @@
         </div>
     </main>
 @endsection
-        
-
-    
-    
-    

@@ -1,10 +1,13 @@
 <?php
 
+use App\Models\User;
+use App\Models\Operator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\MahasiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +23,9 @@ use App\Http\Controllers\RegisterController;
 Route::get('/', function () {
 
     return view('operator',[
-        'users' => DB::table('users')->get(),
+        // 'user' => User::auth()->user()->id,
         'title' => 'PPL',
-        'operators' => DB::table('operators')->get(),
+        'operator' => Operator::where('id', auth()->user()->id)->first(),
     ]);
 })->middleware('auth');
 
@@ -37,5 +40,21 @@ Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']); 
 
 // make route to ProfilController
-Route::get('/edit-profil', [ProfilController::class, 'index'])->middleware('auth');
-Route::post('/edit-profil/{id}', [ProfilController::class, 'update'])->middleware('auth');
+// Route::get('/edit-profil', [ProfilController::class, 'index'])->middleware('auth');
+Route::get('/edit-profil/{id}', [ProfilController::class, 'index'])->middleware('auth');
+Route::put('/edit-profil/{id}', [ProfilController::class, 'update'])->middleware('auth');
+
+// make route to MahasiswaController
+Route::get('/data-mahasiswa', [MahasiswaController::class, 'index'])->middleware('auth');
+
+
+Route::get('/tambah-data-mhs', [MahasiswaController::class, 'create'])->middleware('auth');
+// make route to create new data
+Route::post('/tambah-data-mhs', [MahasiswaController::class, 'store'])->middleware('auth');
+
+// make route to edit data
+Route::get('/edit-mahasiswa/{id}', [MahasiswaController::class, 'edit'])->middleware('auth');
+Route::put('/edit-mahasiswa/{id}', [MahasiswaController::class, 'update'])->middleware('auth');
+
+// make route to delete data mahasiswa
+Route::delete('/data-mahasiswa/{id}', [MahasiswaController::class, 'destroy'])->middleware('auth');

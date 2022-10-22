@@ -24,31 +24,32 @@
             <div class="col-md-12">
               <div class="card">
                   <div class="card-body">
-                      {{-- @foreach($operators as $operator) --}}
-                        @if ($operator->email == auth()->user()->email)
+                      {{--make form to edit--}}
+                      <form action="/edit-profil/{{$operator->id}}" method="post">
+                          @method('put')
+                          @csrf
                           <div class="mb-3">
                               <label for="nama" class="form-label">Nama</label>
-                              <p type="text" class="form-control border-0" id="nama" name="nama">{{ $operator->nama }}</p>
+                              <input disabled type="text" class="form-control" id="nama" name="nama" value="{{ $operator->nama }}">
                           </div>
                           <div class="mb-3">
                               <label for="nip" class="form-label">NIP</label>
-                              <p type="nip" class="form-control border-0" id="nip" name="nip">{{ $operator->nip }}</p>
+                              <input disabled type="text" class="form-control" id="nip" name="nip" value="{{ $operator->nip }}">
                           </div>
                           <div class="mb-3">
                               <label for="email" class="form-label">Email</label>
-                              <p type="email" class="form-control border-0" id="email" name="email">{{ $operator->email }}</p>
+                              <input disabled type="text" class="form-control" id="email" name="email" value="{{ $operator->email }}">
                           </div>
                           <div class="mb-3">
                               <label for="no_hp" class="form-label">No. Telepon</label>
-                              <p type="no_hp" class="form-control border-0" id="no_hp" name="no_hp">{{ $operator->no_hp }}</p>
+                              <input type="text" class="form-control" id="no_hp" name="no_hp" >
                           </div>
                           <div class="mb-3">
                               <label for="alamat" class="form-label">Alamat</label>
-                              <p type="alamat" class="form-control border-0" id="alamat" name="alamat">{{ $operator->alamat }}</p>
+                              <input type="text" class="form-control" id="alamat" name="alamat" >
                           </div>
-                        @endif
-                      {{-- @endforeach --}}
-                      <a href="/edit-profil/{{ $operator->id }}" class="btn btn-primary">Edit</a>
+                          <button type="submit" class="btn btn-primary">Update</button>
+                      </form>
                   </div>
               </div>
             </div>
