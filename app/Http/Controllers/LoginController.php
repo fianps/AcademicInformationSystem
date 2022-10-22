@@ -24,12 +24,21 @@ class LoginController extends Controller
             'password' => 'required|min:5|max:20'
         ]);
 
-        // check email and password
+        // check email, password, and role
         if (auth()->attempt($validatedData)) {
             $request->session()->regenerate();
-            // redirect to operator page
-            return redirect('/')->content('operator');
+            if (auth()->user()->role == 'admin') {
+                return redirect('/')->content('operator');
+            } else if (auth()->user()->role == 'mahasiswa') {
+                return redirect('/mahasiswa')->content('mahasiswa.mahasiswa');
+            }
         }
+        // check email and password
+        // if (auth()->attempt($validatedData)) {
+        //     $request->session()->regenerate();
+        //     // redirect to operator page
+        //     return redirect('/')->content('operator');
+        // }
 
         // redirect to login page
         return back()->with('error','Login failed, please try again');

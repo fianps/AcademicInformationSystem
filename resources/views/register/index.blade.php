@@ -13,8 +13,8 @@
                 <label for="name">Name</label>
               </div>
               <div class="form-floating">
-                <input type="text" name="nip" class="form-control " id="nip" placeholder="nip" required value="{{ old('nip') }}">
-                <label for="nip">NIP</label>
+                <input type="text" name="role" class="form-control " id="role" placeholder="role" required value="{{ old('role') }}">
+                <label for="role">Role</label>
               </div>
               <div class="form-floating">
                 <input type="email" name="email" class="form-control " id="email" placeholder="email" required value="{{ old('email') }}">
