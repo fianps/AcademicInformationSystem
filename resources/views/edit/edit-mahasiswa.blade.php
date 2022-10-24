@@ -5,7 +5,7 @@
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 ">
           <div class="text-start">
               <h3 class="h3">{{ auth()->user()->name }}</h3>
-              <p class="p">Operator</p>
+              <p class="p">{{ auth()->user()->role }}</p>
               <p class="p">Fakultas Sains dan Matematika</p>
           </div>
           <div class="btn-toolbar mb-2 mb-md-0">
@@ -25,7 +25,7 @@
               <div class="card">
                   <div class="card-body">
                       {{--make form to edit--}}
-                      <form action="/edit-mahasiswa/{{$mahasiswa->id}}" method="post">
+                      <form action="/edit-profil/{{$mahasiswa->id}}" method="post">
                           @method('put')
                           @csrf
                           <div class="mb-3">
@@ -38,7 +38,7 @@
                           </div>
                           <div class="mb-3">
                               <label for="email" class="form-label">Email</label>
-                              <input type="text" class="form-control" id="email" name="email" placeholder="{{ $mahasiswa->email }}">
+                              <input disabled type="text" class="form-control" id="email" name="email" value="{{ $mahasiswa->email }}">
                           </div>
                           <div class="mb-3">
                             <label for="angkatan" class="form-label">Angkatan</label>
@@ -50,7 +50,7 @@
                           </div>
                           <div class="mb-3">
                               <label for="alamat" class="form-label">Alamat</label>
-                              <input type="text" class="form-control" id="alamat" name="alamat" >
+                              <input type="text" class="form-control" id="alamat" name="alamat" placeholder="{{ $mahasiswa->alamat }}">
                           </div>
                           <button type="submit" class="btn btn-primary">Update</button>
                       </form>

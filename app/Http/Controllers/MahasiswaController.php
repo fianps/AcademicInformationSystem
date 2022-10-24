@@ -54,7 +54,6 @@ class MahasiswaController extends Controller
             'mahasiswa' => $mahasiswa
         ]);
     }
-
     // create function to update data
     public function update(Request $request, $id)
     {
@@ -63,18 +62,11 @@ class MahasiswaController extends Controller
 
         // make variable to get request data
         $request->validate([
-            // 'nama' => 'required',
-            // 'nim' => 'required|min:5|max:20',
-            'email' => 'required|email:dns|unique:users',
             'no_hp' => 'required',
             'alamat' => 'required',
             'angkatan' => 'required',
         ]);
 
-        // make variable to get request data
-        // $mahasiswa->nama = $request->nama;
-        // $mahasiswa->nim = $request->nim;
-        $mahasiswa->email = $request->email;
         $mahasiswa->no_hp = $request->no_hp;
         $mahasiswa->alamat = $request->alamat;
         $mahasiswa->angkatan = $request->angkatan;
@@ -85,6 +77,39 @@ class MahasiswaController extends Controller
         // redirect to data-mahasiswa page
         return redirect('/data-mahasiswa')->with('success', 'Data Mahasiswa Berhasil Diubah!');
     }
+
+    // user mahasiswa
+    public function editMhs($id)
+    {
+        $mahasiswa = Mahasiswa::find($id);
+        return view('mahasiswa.edit.index', [
+            'title' => 'Edit Profil',
+            'mahasiswa' => $mahasiswa
+        ]);
+    }
+    public function updateMhs(Request $request, $id)
+    {
+        // make variable to get mahasiswa data
+        $mahasiswa = Mahasiswa::find($id);
+
+        // make variable to get request data
+        $request->validate([
+            'no_hp' => 'required',
+            'alamat' => 'required',
+            'angkatan' => 'required',
+        ]);
+
+        $mahasiswa->no_hp = $request->no_hp;
+        $mahasiswa->alamat = $request->alamat;
+        $mahasiswa->angkatan = $request->angkatan;
+
+        // save data to database
+        $mahasiswa->save();
+
+        // redirect to data-mahasiswa page
+        return redirect('/mahasiswa')->with('success', 'Data Mahasiswa Berhasil Diubah!');
+    }
+
 
     // make delate function
     public function destroy($id)

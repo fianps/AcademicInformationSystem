@@ -8,7 +8,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ ($title === 'Data Mahasiswa') ? 'active' : '' }}" href="/data-mahasiswa">
+          <a class="nav-link {{ ($title === 'Data Mahasiswa' || $title === 'Edit Data Mahasiswa' || $title === 'Tambah Data Mahasiswa') ? 'active' : '' }}" href="/data-mahasiswa">
             <span data-feather="data-mahasiswa" class="align-text-bottom"></span>
             Data Mahasiswa
           </a>

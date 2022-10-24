@@ -2,25 +2,25 @@
     <div class="position-sticky pt-3 sidebar-sticky">
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link {{ ($title === 'PPL' || $title === 'Edit Profil') ? 'active' : '' }}" aria-current="page" href="/">
+          <a class="nav-link {{ ($title === 'PPL' || $title === 'Edit Profil') ? 'active' : '' }}" aria-current="page" href="/mahasiswa">
             <span data-feather="profil" class="align-text-bottom"></span>
             Profil
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ ($title === 'IRS') ? 'active' : '' }}" href="/irs">
+          <a class="nav-link {{ ($title === 'Data IRS' || $title === 'Edit Data IRS') ? 'active' : '' }}" href="/irs">
             <span data-feather="irs" class="align-text-bottom"></span>
             IRS
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ ($title === 'KHS') ? 'active' : '' }}" href="/khs">
+          <a class="nav-link {{ ($title === 'Data KHS' || $title === 'Edit KHS') ? 'active' : '' }}" href="/khs">
             <span data-feather="khs" class="align-text-bottom"></span>
             KHS
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ ($title === 'PKL') ? 'active' : '' }}" href="/pkl">
+          <a class="nav-link {{ ($title === 'Data PKL' || $title === 'Edit PKL') ? 'active' : '' }}" href="/pkl">
             <span data-feather="pkl" class="align-text-bottom"></span>
             PKL
           </a>
