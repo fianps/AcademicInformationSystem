@@ -49,3 +49,7 @@ s(
         });
     }
 )();
+
+$(function () {
+    $("#datepicker").datepicker();
+});

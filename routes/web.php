@@ -10,6 +10,7 @@ use App\Http\Controllers\KHSController;
 use App\Http\Controllers\PKLController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\SkripsiController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\MahasiswaController;
 
@@ -73,8 +74,8 @@ Route::get('/mahasiswa', function () {
     ]);
 })->middleware('auth','isMahasiswa');
 // make route to edit-profil
-Route::get('/edit-profil/{id}', [MahasiswaController::class, 'editMhs'])->middleware('auth','isMahasiswa');
-Route::put('/edit-profil/{id}', [MahasiswaController::class, 'updateMhs'])->middleware('auth','isMahasiswa');
+Route::get('/edit-profilmhs/{id}', [MahasiswaController::class, 'editMhs'])->middleware('auth','isMahasiswa');
+Route::put('/edit-profilmhs/{id}', [MahasiswaController::class, 'updateMhs'])->middleware('auth','isMahasiswa');
 
 // make route to irs
 Route::get('/irs', [IRSController::class, 'index'])->middleware('auth','isMahasiswa');
@@ -90,3 +91,8 @@ Route::put('/edit-khs/{id}', [KHSController::class, 'update'])->middleware('auth
 Route::get('/pkl', [PKLController::class, 'index'])->middleware('auth','isMahasiswa');
 Route::get('/edit-pkl/{id}', [PKLController::class, 'edit'])->middleware('auth','isMahasiswa');
 Route::put('/edit-pkl/{id}', [PKLController::class, 'update'])->middleware('auth','isMahasiswa');
+
+// make route to skripsi
+Route::get('/skripsi', [SkripsiController::class, 'index'])->middleware('auth','isMahasiswa');
+Route::get('/edit-skripsi/{id}', [SkripsiController::class, 'edit'])->middleware('auth','isMahasiswa');
+Route::put('/edit-skripsi/{id}', [SkripsiController::class, 'update'])->middleware('auth','isMahasiswa');

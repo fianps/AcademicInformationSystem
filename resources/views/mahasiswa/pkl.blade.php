@@ -22,7 +22,7 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
-              <div class="card">
+              <div class="card mb-4">
                   <div class="card-body">
                       <div class="mb-3">
                           <label for="status" class="form-label">Status</label>

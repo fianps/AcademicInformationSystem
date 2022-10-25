@@ -22,7 +22,7 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
-              <div class="card">
+              <div class="card mb-4">
                   <div class="card-body">
                       {{-- @foreach($operators as $operator) --}}
                         {{-- @if ($mahasiswa->nama == auth()->user()->name) --}}
@@ -52,7 +52,7 @@
                           </div>
                         {{-- @endif --}}
                       {{-- @endforeach --}}
-                      <a href="/edit-profil/{{ $mahasiswa->id }}" class="btn btn-primary">Edit</a>
+                      <a href="/edit-profilmhs/{{ $mahasiswa->id }}" class="btn btn-primary">Edit</a>
                   </div>
               </div>
             </div>

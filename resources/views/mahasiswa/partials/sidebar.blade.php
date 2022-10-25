@@ -8,7 +8,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ ($title === 'Data IRS' || $title === 'Edit Data IRS') ? 'active' : '' }}" href="/irs">
+          <a class="nav-link {{ ($title === 'Data IRS' || $title === 'Edit IRS') ? 'active' : '' }}" href="/irs">
             <span data-feather="irs" class="align-text-bottom"></span>
             IRS
           </a>
@@ -26,7 +26,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ ($title === 'Skripsi') ? 'active' : '' }}" href="/skripsi">
+          <a class="nav-link {{ ($title === 'Data Skripsi' || $title === 'Edit Skripsi') ? 'active' : '' }}" href="/skripsi">
             <span data-feather="skripsi" class="align-text-bottom"></span>
             Skripsi
           </a>
