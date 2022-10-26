@@ -33,7 +33,7 @@
         </li>
       </ul>
   
-      <form action="/logout" method="POST" class="align-items-center">
+      <form action="/logout" method="POST" class="m-3">
           @csrf
           <button type="submit" class="btn btn-danger">Logout</button>
       </form>

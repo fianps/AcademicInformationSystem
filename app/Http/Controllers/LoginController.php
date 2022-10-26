@@ -31,14 +31,12 @@ class LoginController extends Controller
                 return redirect('/')->content('operator');
             } else if (auth()->user()->role == 'mahasiswa') {
                 return redirect('/mahasiswa')->content('mahasiswa.mahasiswa');
+            } else if (auth()->user()->role == 'dosen'){
+                return redirect('/dosen')->content('dosen.dosen');
+            } else if (auth()->user()->role == 'departemen'){
+                return redirect('/departemen')->content('departemen.departemen');
             }
         }
-        // check email and password
-        // if (auth()->attempt($validatedData)) {
-        //     $request->session()->regenerate();
-        //     // redirect to operator page
-        //     return redirect('/')->content('operator');
-        // }
 
         // redirect to login page
         return back()->with('error','Login failed, please try again');

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IRSController;
 use App\Http\Controllers\KHSController;
 use App\Http\Controllers\PKLController;
+use App\Http\Controllers\DosenController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\SkripsiController;
@@ -96,3 +97,15 @@ Route::put('/edit-pkl/{id}', [PKLController::class, 'update'])->middleware('auth
 Route::get('/skripsi', [SkripsiController::class, 'index'])->middleware('auth','isMahasiswa');
 Route::get('/edit-skripsi/{id}', [SkripsiController::class, 'edit'])->middleware('auth','isMahasiswa');
 Route::put('/edit-skripsi/{id}', [SkripsiController::class, 'update'])->middleware('auth','isMahasiswa');
+
+// dosen
+Route::get('/dosen', [DosenController::class, 'index'])->middleware('auth', 'isDosen');
+Route::get('/dosen/{id}', [DosenController::class, 'show'])->middleware('auth', 'isDosen');
+// make route to changeStatus
+Route::put('/dosen/{id}', [DosenController::class, 'changeStatus'])->middleware('auth', 'isDosen');
+Route::get('/data-pkl', [DosenController::class, 'dataPkl'])->middleware('auth', 'isDosen');
+Route::get('/data-skripsi', [DosenController::class, 'dataSkripsi'])->middleware('auth', 'isDosen');
+
+// departemen
+Route::get('/departemen', [DosenController::class, 'dep'])->middleware('auth', 'isDep');
+Route::get('/departemen/{id}', [DosenController::class, 'show'])->middleware('auth', 'isDep');
