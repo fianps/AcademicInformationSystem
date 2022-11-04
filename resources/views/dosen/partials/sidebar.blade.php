@@ -1,29 +1,20 @@
-<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-    <div class="position-sticky pt-3 sidebar-sticky">
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <a class="nav-link {{ ($title === 'Dosen') ? 'active' : '' }}" aria-current="page" href="/dosen">
-            <span data-feather="profil" class="align-text-bottom"></span>
-            Verifikasi Mahasiswa
-          </a>
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-inner slimscroll">
+    <div id="sidebar-menu" class="sidebar-menu">
+      <ul>
+        <li class="{{ ($title === 'Dashboard') ? 'active' : '' }}">
+          <a href="/dosen-dashboard"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link {{ ($title === 'Data PKL') ? 'active' : '' }}" aria-current="page" href="/data-pkl">
-            <span data-feather="profil" class="align-text-bottom"></span>
-            Data PKL Mahasiswa
-          </a>
+        <li class="{{ ($title === 'Dosen') ? 'active' : '' }}">
+          <a href="/dosen"><i class="fas fa-user"></i> <span>Verifikasi Mahasiswa</span></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link {{ ($title === 'Data Skripsi') ? 'active' : '' }}" aria-current="page" href="/data-skripsi">
-            <span data-feather="profil" class="align-text-bottom"></span>
-            Data Skripsi Mahasiswa
-          </a>
+        <li class="{{ ($title === 'Data PKL') ? 'active' : '' }}">
+          <a href="/data-pkl"><i class="fas fa-cube"></i> <span>Data PKL Mahasiswa</span></a>
+        </li>
+        <li class="{{ ($title === 'Data Skripsi') ? 'active' : '' }}">
+          <a href="/data-skripsi"><i class="fas fa-book"></i> <span>Data Skripsi Mahasiswa</span></a>
         </li>
       </ul>
-  
-      <form action="/logout" method="POST" class="m-3">
-          @csrf
-          <button type="submit" class="btn btn-danger">Logout</button>
-      </form>
     </div>
-</nav>
+  </div>
+</div>

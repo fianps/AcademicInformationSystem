@@ -2,15 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\IRS;
+use App\Models\KHS;
 use Illuminate\Http\Request;
 use App\Models\Mahasiswa;
+use App\Models\PKL;
+use App\Models\Skripsi;
 
 class MahasiswaController extends Controller
 {
     //make function to show data
-    public function index()
+    public function index(Request $request)
     {
-        $mahasiswas = Mahasiswa::all();
+        if ($request->has('search')) {
+            $mahasiswas = Mahasiswa::where('nama', 'like', "%" . $request->search . "%")->get();
+        } else {
+            $mahasiswas = Mahasiswa::all();
+        }
         return view('data-mahasiswa', [
             'title' => 'Data Mahasiswa',
             'mahasiswas' => $mahasiswas
@@ -36,10 +44,24 @@ class MahasiswaController extends Controller
             'no_hp' => 'required',
             'alamat' => 'required',
             'angkatan' => 'required',
+            'status' => 'required',
         ]);
 
         // insert data to table
         Mahasiswa::create($validatedData);
+        // // insert validatedData[email] to table irs if email in irs != email in mahasiswa
+        // if(IRS::where('email', $validatedData['email'])->doesntExist()){
+        //     IRS::create(['email' => $validatedData['email']]);
+        // }elseif(KHS::where('email', $validatedData['email'])->doesntExist()){
+        //     KHS::create(['email' => $validatedData['email']]);
+        // }elseif(PKL::where('email', $validatedData['email'])->doesntExist()){
+        //     PKL::create(['email' => $validatedData['email']]);
+        // }elseif(Skripsi::where('email', $validatedData['email'])->doesntExist()){
+        //     Skripsi::create(['email' => $validatedData['email']]);
+        // }
+
+        // $irs = IRS::find($email);
+        // if ($validatedData['email'] )
 
         // redirect to data-mahasiswa page
         return redirect('/data-mahasiswa')->with('success', 'Data Mahasiswa Berhasil Ditambahkan!');
@@ -123,4 +145,23 @@ class MahasiswaController extends Controller
         // redirect to data-mahasiswa page
         return redirect('/data-mahasiswa')->with('success', 'Data Mahasiswa Berhasil Dihapus!');
     }
+
+    // make function to import data mahasiswa to database
+    // public function import(Request $request)
+    // {
+    //     // make variable to get file
+    //     $file = $request->file('file');
+
+    //     // make variable to get file name
+    //     $nama_file = rand() . $file->getClientOriginalName();
+
+    //     // make variable to get file extension
+    //     $file->move('file_mahasiswa', $nama_file);
+
+    //     // import data
+    //     Excel::import(new MahasiswaImport, public_path('/file_mahasiswa/' . $nama_file));
+
+    //     // redirect to data-mahasiswa page
+    //     return redirect('/data-mahasiswa')->with('success', 'Data Mahasiswa Berhasil Diimport!');
+    // }
 }

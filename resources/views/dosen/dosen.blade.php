@@ -1,70 +1,74 @@
 @extends('dosen/layouts/main')
 
 @section('container')
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 ">
-        <div class="text-start">
-            <h3 class="h3">{{ auth()->user()->name }}</h3>
-            <p class="m-0">Dosen</p>
+<div class="page-wrapper">
+  <div class="content container-fluid">
+    <div class="page-header">
+      <div class="row align-items-center">
+        <div class="col">
+          <div class="mt-5">
+            <h3 class="page-title">Verification</h3>
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/dosen">home</a></li>
+              <li class="breadcrumb-item active">Verification</li>
+            </ul>
+          </div>
         </div>
       </div>
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-                  <div class="card-body">
-                      <div class="row">
-                        {{--create header--}}
-                        <div class="col-md-6">
-                          <h4>Verifikasi Berkas Mahasiswa</h4>
-                        </div>
-                        {{--create table mahasiswa--}}
-                        <table class="table table-striped">
-                            <thead>
-                              <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nama</th>
-                                <th scope="col">NIM</th>
-                                <th scope="col">Status</th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($mahasiswas as $mahasiswa)
-                              <tr>
-                                <th scope="row">{{$mahasiswa->id}}</th>
-                                <td>{{$mahasiswa->nama}}</td>
-                                <td>{{$mahasiswa->nim}}</td>
-                                <td>{{$mahasiswa->status}}</td>
-                                <td>
-                                    {{--create button detail--}}
-                                    <a href="/dosen/{{$mahasiswa->id}}" class="btn btn-primary">Detail</a>
-                                    {{--create button changeStatus--}}
-                                    @if ($mahasiswa->status === 'Belum Disetujui')
-                                        <form action="/dosen/{{$mahasiswa->id}}" method="POST" class="d-inline">
-                                            @method('put')
-                                            @csrf
-                                            <button type="submit" class="btn btn-success">Setujui</button>
-                                        </form>
-                                    @else
-                                        <form action="/dosen/{{$mahasiswa->id}}" method="POST" class="d-inline">
-                                            @method('put')
-                                            @csrf
-                                            <button type="submit" class="btn btn-danger">Batalkan</button>
-                                        </form>
-                                    @endif
-                                </td>
-                              </tr>
-                            @endforeach
-                            </tbody>
-                          </table>
-                      </div>
-                  </div>
-              </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="datatable table table-stripped">
+                <thead>
+                  <tr>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">NIM</th>
+                    <th>Year</th>
+                    <th>Address</th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach($mahasiswas as $mahasiswa)
+                    <tr>
+                      <td>
+                        <h2 class="table-avatar">
+                          <a href="/dosen/{{$mahasiswa->id}}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ asset('assets/img/profiles/user-avatar.png') }}" alt="User Image"></a>
+                          <a href="/dosen/{{$mahasiswa->id}}">{{$mahasiswa->nama}} <span>{{$mahasiswa->no_hp}}</span></a>
+                        </h2>
+                      </td>
+                      <td class="text-center">{{$mahasiswa->nim}}</td>
+                      <td>{{$mahasiswa->angkatan}}</td>
+                      <td>{{$mahasiswa->alamat}}</td>
+                      <td class="text-center">
+                        @if ($mahasiswa->status === 'Belum Disetujui')
+                          <form action="/dosen/{{$mahasiswa->id}}" method="POST" class="text-center">
+                            @method('put')
+                            @csrf
+                            <button type="submit" style="border: none" class="badge badge-pill bg-danger inv-badge">Decline</button>
+                          </form>
+                        @else
+                          <form action="/dosen/{{$mahasiswa->id}}" method="POST" class="text-center">
+                            @method('put')
+                            @csrf
+                            <button type="submit" style="border: none" class="badge badge-pill bg-success inv-badge">Approved</button>
+                          </form>
+                        @endif
+                      </td>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>
             </div>
+          </div>
         </div>
-    </main>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
         
 

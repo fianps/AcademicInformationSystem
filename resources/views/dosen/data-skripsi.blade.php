@@ -1,113 +1,121 @@
 @extends('dosen/layouts/main')
 
 @section('container')
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 ">
-            <div class="text-start">
-                <h3 class="h3">{{ auth()->user()->name }}</h3>
-                <p class="m-0">Dosen</p>
+<div class="page-wrapper">
+  <div class="content container-fluid">
+    <div class="page-header">
+      <div class="row align-items-center">
+        <div class="col">
+          <div class="mt-5">
+            <h3 class="page-title">Data Skripsi</h3>
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/dosen">home</a></li>
+              <li class="breadcrumb-item active">Data Skripsi</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <ul class="nav nav-tabs nav-tabs-solid nav-justified">
+              <li class="nav-item"><a class="nav-link {{ (request('id') === 'sudah') ? 'active' : '' }}" href="/data-skripsi?id=sudah" >Lulus</a></li>
+              <li class="nav-item"><a class="nav-link {{ (request('id') === 'proses') ? 'active' : '' }}" href="/data-skripsi?id=proses" >Proses</a></li>
+              <li class="nav-item"><a class="nav-link {{ (request('id') === 'belum') ? 'active' : '' }}" href="/data-skripsi?id=belum" >Belum</a></li>
+            </ul>
+            <div class="table-responsive">
+              <table class="datatable table table-stripped">
+                <thead>
+                  <tr>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">NIM</th>
+                    <th>Year</th>
+                    <th class="text-center">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @if (request('id') == 'sudah')
+                    @foreach ($mahasiswa as $mhs)
+                      @foreach ($skripsi as $data)
+                        @if ($mhs->email == $data->email && $data->status == 'Lulus')
+                          <tr>
+                            <td>
+                              <h2 class="table-avatar">
+                                <a href="/dosen/{{$mhs->id}}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ asset('assets/img/profiles/user-avatar.png') }}" alt="User Image"></a>
+                                <a href="/dosen/{{$mhs->id}}">{{$mhs->nama}} <span>{{$mhs->no_hp}}</span></a>
+                              </h2>    
+                            </td>
+                            <td class="text-center">{{ $mhs->nim }}</td>
+                            <td>{{ $mhs->angkatan }}</td>
+                            <td class="text-center">{{ $data->status }}</td>
+                          </tr>
+                        @endif
+                      @endforeach
+                    @endforeach
+                  @elseif (request('id') == 'belum')
+                    @foreach ($mahasiswa as $mhs)
+                      @foreach ($skripsi as $data)
+                        @if ($mhs->email == $data->email && $data->status == 'Belum')
+                          <tr>
+                            <td>
+                              <h2 class="table-avatar">
+                                <a href="/dosen/{{$mhs->id}}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ asset('assets/img/profiles/user-avatar.png') }}" alt="User Image"></a>
+                                <a href="/dosen/{{$mhs->id}}">{{$mhs->nama}} <span>{{$mhs->no_hp}}</span></a>
+                              </h2>    
+                            </td>
+                            <td class="text-center">{{ $mhs->nim }}</td>
+                            <td>{{ $mhs->angkatan }}</td>
+                            <td class="text-center">{{ $data->status }}</td>
+                          </tr>
+                        @endif
+                      @endforeach
+                    @endforeach
+                  @elseif (request('id') == 'proses')
+                    @foreach ($mahasiswa as $mhs)
+                      @foreach ($skripsi as $data)
+                        @if ($mhs->email == $data->email && $data->status == 'Proses')
+                          <tr>
+                            <td>
+                              <h2 class="table-avatar">
+                                <a href="/dosen/{{$mhs->id}}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ asset('assets/img/profiles/user-avatar.png') }}" alt="User Image"></a>
+                                <a href="/dosen/{{$mhs->id}}">{{$mhs->nama}} <span>{{$mhs->no_hp}}</span></a>
+                              </h2>    
+                            </td>
+                            <td class="text-center">{{ $mhs->nim }}</td>
+                            <td>{{ $mhs->angkatan }}</td>
+                            <td class="text-center">{{ $data->status }}</td>
+                          </tr>
+                        @endif
+                      @endforeach
+                    @endforeach
+                  @else
+                    @foreach ($mahasiswa as $mhs)
+                      @foreach ($skripsi as $data)
+                        @if ($mhs->email == $data->email)
+                          <tr>
+                            <td>
+                              <h2 class="table-avatar">
+                                <a href="/dosen/{{$mhs->id}}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ asset('assets/img/profiles/user-avatar.png') }}" alt="User Image"></a>
+                                <a href="/dosen/{{$mhs->id}}">{{$mhs->nama}} <span>{{$mhs->no_hp}}</span></a>
+                              </h2>    
+                            </td>
+                            <td class="text-center">{{ $mhs->nim }}</td>
+                            <td>{{ $mhs->angkatan }}</td>
+                            <td class="text-center">{{ $data->status }}</td>
+                          </tr>
+                        @endif
+                      @endforeach
+                    @endforeach
+                  @endif
+                </tbody>
+              </table>
             </div>
           </div>
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-                  <div class="card-body">
-                      <div class="row">
-                        {{--create header--}}
-                        <div class="md-6">
-                          <h4>Data Skripsi Mahasiswa</h4>
-                        </div>
-                        <hr>
-                        <div class="btn-group me-2">
-                            <a href="/data-skripsi?id=sudah" class="btn btn-sm btn-outline-secondary {{ (request('id') === 'sudah') ? 'active' : '' }}">Selesai</a>
-                            <a href="/data-skripsi?id=proses" class="btn btn-sm btn-outline-secondary {{ (request('id') === 'proses') ? 'active' : '' }}">Proses</a>
-                            <a href="/data-skripsi?id=belum" class="btn btn-sm btn-outline-secondary {{ (request('id') === 'belum') ? 'active' : '' }}">Belum</a>
-                        </div>
-                        {{--create table mahasiswa--}}
-                        <table class="table table-striped">
-                            <thead>
-                              <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nama</th>
-                                <th scope="col">NIM</th>
-                                <th scope="col">Status</th>
-                                <th scope="col"></th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            {{--get id link to show table--}}
-                            @if (request('id') == 'sudah')
-                                @foreach ($mahasiswa as $mhs)
-                                    @foreach ($skripsi as $data)
-                                        @if ($mhs->email == $data->email && $data->status == 'Lulus')
-                                            <tr>
-                                                <th scope="row">{{ $loop->iteration }}</th>
-                                                <td>{{ $mhs->nama }}</td>
-                                                <td>{{ $mhs->nim }}</td>
-                                                <td>{{ $data->status }}</td>
-                                                <td>
-                                                    <a href="/dosen/{{ $mhs->id }}" class="btn btn-primary">Detail</a>
-                                                </td>
-                                            </tr>
-                                        @endif
-                                    @endforeach
-                                @endforeach
-                            @elseif (request('id') == 'proses')
-                                @foreach ($mahasiswa as $mhs)
-                                    @foreach ($skripsi as $data)
-                                        @if ($mhs->email == $data->email && $data->status == 'Proses')
-                                            <tr>
-                                                <th scope="row">{{ $loop->iteration }}</th>
-                                                <td>{{ $mhs->nama }}</td>
-                                                <td>{{ $mhs->nim }}</td>
-                                                <td>{{ $data->status }}</td>
-                                                <td>
-                                                    <a href="/dosen/{{ $mhs->id }}" class="btn btn-primary">Detail</a>
-                                                </td>
-                                            </tr>
-                                        @endif
-                                    @endforeach
-                                @endforeach
-                            @elseif (request('id') == 'belum')
-                                @foreach ($mahasiswa as $mhs)
-                                    @foreach ($skripsi as $data)
-                                        @if ($mhs->email == $data->email && $data->status == 'Belum Ambil')
-                                            <tr>
-                                                <th scope="row">{{ $loop->iteration }}</th>
-                                                <td>{{ $mhs->nama }}</td>
-                                                <td>{{ $mhs->nim }}</td>
-                                                <td>{{ $data->status }}</td>
-                                                <td>
-                                                    <a href="/dosen/{{ $mhs->id }}" class="btn btn-primary">Detail</a>
-                                                </td>
-                                            </tr>
-                                        @endif
-                                    @endforeach
-                                @endforeach
-                            @else
-                                @foreach ($mahasiswa as $mhs)
-                                    @foreach ($skripsi as $data)
-                                        @if ($mhs->email == $data->email)
-                                            <tr>
-                                                <th scope="row">{{ $loop->iteration }}</th>
-                                                <td>{{ $mhs->nama }}</td>
-                                                <td>{{ $mhs->nim }}</td>
-                                                <td>{{ $data->status }}</td>
-                                                <td>
-                                                    <a href="/dosen/{{ $mhs->id }}" class="btn btn-primary">Detail</a>
-                                                </td>
-                                            </tr>
-                                        @endif
-                                    @endforeach
-                                @endforeach
-                            @endif
-                            </tbody>
-                          </table>
-                      </div>
-                  </div>
-              </div>
-            </div>
         </div>
-    </main>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection

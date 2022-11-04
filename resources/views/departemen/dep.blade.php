@@ -1,59 +1,58 @@
 @extends('departemen/layouts/main')
 
 @section('container')
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 ">
-        <div class="text-start">
-            <h3 class="h3">{{ auth()->user()->name }}</h3>
-            <p class="m-0">Departemen</p>
+<div class="page-wrapper">
+  <div class="content container-fluid">
+    <div class="page-header">
+      <div class="row align-items-center">
+        <div class="col">
+          <div class="mt-5">
+            <h3 class="page-title">Data Mahasiswa</h3>
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/departemen-dashboard">home</a></li>
+              <li class="breadcrumb-item active">Data Mahasiswa</li>
+            </ul>
+          </div>
         </div>
       </div>
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-                  <div class="card-body">
-                    {{--create header--}}
-                    <div class="row">
-                      <div class="col-md-6">
-                        <h4>Data Mahasiswa</h4>
-                      </div>
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nama</th>
-                            <th scope="col">NIM</th>
-                            <th scope="col">Angkatan</th>
-                            <th scope="col">Alamat</th>
-                            <th scope="col"></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($mahasiswas as $mahasiswa)
-                          <tr>
-                            <th scope="row">{{$mahasiswa->id}}</th>
-                            <td>
-                                <div class="row">
-                                    <p class="p mb-0">{{$mahasiswa->nama}}</p>
-                                    <p class="form-text">{{$mahasiswa->no_hp}}</p>
-                                </div>
-                            </td>
-                            <td>{{$mahasiswa->nim}}</td>
-                            <td>{{$mahasiswa->angkatan}}</td>
-                            <td>{{$mahasiswa->alamat}}</td>
-                            <td>
-                                {{--create button edit--}}
-                                <a href="/departemen/{{$mahasiswa->id}}" class="btn btn-primary">Detail</a>
-                            </td>
-                          </tr>
-                          @endforeach
-                        </tbody>
-                      </table>   
-                    </div>
-                  </div>
-              </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="datatable table table-stripped">
+                <thead>
+                  <tr>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">NIM</th>
+                    <th>Year</th>
+                    <th>Address</th>
+                    <th class="text-center">Lecture Code</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach($mahasiswas as $mahasiswa)
+                    <tr>
+                      <td>
+                        <h2 class="table-avatar">
+                          <a href="/departemen/{{$mahasiswa->id}}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ asset('assets/img/profiles/user-avatar.png') }}" alt="User Image"></a>
+                          <a href="/departemen/{{$mahasiswa->id}}">{{$mahasiswa->nama}} <span>{{$mahasiswa->no_hp}}</span></a>
+                        </h2>
+                      </td>
+                      <td class="text-center">{{$mahasiswa->nim}}</td>
+                      <td>{{$mahasiswa->angkatan}}</td>
+                      <td>{{$mahasiswa->alamat}}</td>
+                      <td class="text-center">{{$mahasiswa->kode_wali}}</td>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>
             </div>
+          </div>
         </div>
-    </main>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection

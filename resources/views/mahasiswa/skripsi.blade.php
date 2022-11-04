@@ -1,58 +1,71 @@
 @extends('mahasiswa/layouts/main')
 
 @section('container')
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 ">
-          <div class="text-start">
-              <h3 class="h3">{{ auth()->user()->name }}</h3>
-              <p class="m-0">Mahasiswa</p>
-          </div>
+<div class="page-wrapper">
+  <div class="content container-fluid">
+    <div class="page-header mt-5">
+      <div class="row">
+        <div class="col">
+          <h3 class="page-title">Skripsi</h3>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/mahasiswa">home</a></li>
+            <li class="breadcrumb-item active">Skripsi</li>
+          </ul>
         </div>
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card mb-4">
-                  <div class="card-body">
-                      <div class="mb-3">
-                          <label for="status" class="form-label">Status</label>
-                          <p type="text" class="form-control border-0" id="status" name="status">{{ $skripsi->status }}</p>
-                      </div>
-                      <div class="mb-3">
-                          <label for="nilai" class="form-label">Nilai</label>
-                          @if ($skripsi->nilai == null)
-                              <p type="text" class="form-control border-0" id="nilai" name="nilai">-</p>
-                            @else
-                              <p type="text" class="form-control border-0" id="nilai" name="nilai">{{ $skripsi->nilai }}</p>
-                            @endif
-                      </div>
-                      <div class="mb-3">
-                          <label for="lama_studi" class="form-label">Lama Studi</label>
-                          @if ($skripsi->lama_studi == null)
-                              <p type="text" class="form-control border-0" id="lama_studi" name="lama_studi">-</p>
-                            @else
-                              <p type="text" class="form-control border-0" id="lama_studi" name="lama_studi">{{ $skripsi->lama_studi }}</p>
-                            @endif
-                      </div>
-                      <div class="mb-3">
-                          <label for="tgl_sidang" class="form-label">Tanggal Sidang</label>
-                          @if ($skripsi->tgl_sidang == null)
-                              <p type="text" class="form-control border-0" id="tgl_sidang" name="tgl_sidang">-</p>
-                            @else
-                              <p type="text" class="form-control border-0" id="tgl_sidang" name="tgl_sidang">{{ $skripsi->tgl_sidang }}</p>
-                            @endif
-                      </div>
-                      <div class="mb-3">
-                          <label for="file_skripsi" class="form-label">Berita Acara</label>
-                          @if ($skripsi->file_skripsi == null)
-                              <p type="text" class="form-control border-0" id="file_skripsi" name="file_skripsi">-</p>
-                          @else
-                          <a href="storage/skripsi/{{$skripsi->file_skripsi}}" target="_blank" style="text-decoration: none" class="form-control border-0 text-primary">Cek Berita Acara</a>
-                          @endif
-                      </div>
-                      <a href="/edit-skripsi/{{ $skripsi->id }}" class="btn btn-primary">Change</a>
-                  </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tab-content profile-tab-cont">
+          <div class="tab-pane fade show active">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title d-flex justify-content-between">
+                  <span>Skripsi Details</span>
+                  <a class="edit-link" href="/edit-skripsi/{{ $skripsi->id }}"><i class="fa fa-edit mr-1"></i>Edit</a>
+                </h5>
+                <div class="row mt-5">
+                  <p class="col-sm-2 text-sm-right mb-0 mb-sm-2">Status</p>
+                  <p class="col-sm-9">{{$skripsi->status}}</p>
+                </div>
+                <div class="row">
+                  <p class="col-sm-2 text-sm-right mb-0 mb-sm-2">Score</p>
+                  @if ($skripsi->nilai != null)
+                    <p class="col-sm-9">{{$skripsi->nilai}}</p>
+                  @else
+                    <p class="col-sm-9">-</p>
+                  @endif
+                </div>
+                <div class="row">
+                  <p class="col-sm-2 text-sm-right mb-0 mb-sm-2">Length of Study</p>
+                  @if ($skripsi->lama_studi != null)
+                    <p class="col-sm-9">{{$skripsi->lama_studi}}</p>
+                  @else
+                    <p class="col-sm-9">-</p>
+                  @endif
+                </div>
+                <div class="row">
+                  <p class="col-sm-2 text-sm-right mb-0 mb-sm-2">Thesis Trial Date</p>
+                  @if ($skripsi->tgl_sidang != null)
+                    <p class="col-sm-9">{{$skripsi->tgl_sidang}}</p>
+                  @else
+                    <p class="col-sm-9">-</p>
+                  @endif
+                </div>
+                <div class="row">
+                  <p class="col-sm-2 text-sm-right mb-0 mb-sm-2">Attachment</p>
+                  @if ($skripsi->file_skripsi == null)
+                    <a href="storage/skripsi/{{$skripsi->file_skripsi}}" target="_blank" class="col-sm-9">Check here</a>
+                  @else
+                    <p class="col-sm-9">-</p>
+                  @endif
+                </div>
               </div>
             </div>
+          </div>
         </div>
-    </main>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection

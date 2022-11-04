@@ -1,38 +1,49 @@
 @extends('mahasiswa/layouts/main')
 
 @section('container')
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 ">
-          <div class="text-start">
-              <h3 class="h3">{{ auth()->user()->name }}</h3>
-              <p class="m-0">Mahasiswa</p>
+<div class="page-wrapper">
+    <div class="content container-fluid">
+      <div class="page-header mt-5">
+        <div class="row">
+          <div class="col">
+            <h3 class="page-title">IRS</h3>
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/mahasiswa">home</a></li>
+              <li class="breadcrumb-item active">IRS</li>
+            </ul>
           </div>
         </div>
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card mb-4">
-                  <div class="card-body">
-                      <div class="mb-3">
-                          <label for="semester" class="form-label">Semester Aktif</label>
-                          <p type="text" class="form-control border-0" id="semester" name="semester">{{ $irs->semester }}</p>
-                      </div>
-                      <div class="mb-3">
-                          <label for="sks" class="form-label">SKS</label>
-                          <p type="number" class="form-control border-0" id="sks" name="sks">{{ $irs->sks }}</p>
-                      </div>
-                      <div class="mb-3">
-                          <label for="file_irs" class="form-label">Scan IRS</label>
-                          {{--href to open upload file--}}
-                          <a href="storage/irs/{{$irs->file_irs}}" target="_blank" style="text-decoration: none" class="form-control border-0 text-primary">Cek File IRS</a>
-                          {{-- <a href="{{asset('/storage/file_irs/'.$irs->file_irs)}}" class="form-control border-0 text-primary" style="text-decoration: none">Cek File IRS</a> --}}
-                      </div>
-                      <a href="/edit-irs/{{ $irs->id }}" class="btn btn-primary">Change</a>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tab-content profile-tab-cont">
+            <div class="tab-pane fade show active">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title d-flex justify-content-between">
+                    <span>IRS Details</span>
+                    <a class="edit-link" href="/edit-irs/{{ $irs->id }}"><i class="fa fa-edit mr-1"></i>Edit</a>
+                  </h5>
+                  <div class="row mt-5">
+                    <p class="col-sm-2 text-sm-right mb-0 mb-sm-2">Semester</p>
+                    <p class="col-sm-9">{{$irs->semester}}</p>
                   </div>
+                  <div class="row">
+                    <p class="col-sm-2 text-sm-right mb-0 mb-sm-2">SKS</p>
+                    <p class="col-sm-9">{{$irs->sks}}</p>
+                  </div>
+                  <div class="row">
+                    <p class="col-sm-2 text-sm-right mb-0 mb-sm-2">Attachment</p>
+                    <a href="storage/irs/{{$irs->file_irs}}" target="_blank" class="col-sm-9">Check here</a>
+                  </div>
+                </div>
               </div>
             </div>
+          </div>
         </div>
-    </main>
+      </div>
+    </div>
+  </div>
 @endsection
         
 

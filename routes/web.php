@@ -49,21 +49,22 @@ Route::post('/register', [RegisterController::class, 'store']);
 // Route::get('/edit-profil', [ProfilController::class, 'index'])->middleware('auth');
 Route::get('/edit-profil/{id}', [ProfilController::class, 'index'])->middleware('auth','isAdmin');
 Route::put('/edit-profil/{id}', [ProfilController::class, 'update'])->middleware('auth','isAdmin');
-
 // make route to MahasiswaController
 Route::get('/data-mahasiswa', [MahasiswaController::class, 'index'])->middleware('auth','isAdmin');
-
-
 Route::get('/tambah-data-mhs', [MahasiswaController::class, 'create'])->middleware('auth','isAdmin');
 // make route to create new data
-Route::post('/tambah-data-mhs', [MahasiswaController::class, 'store'])->middleware('auth','isAdmin');
-
+Route::put('/tambah-data-mhs', [MahasiswaController::class, 'store'])->middleware('auth','isAdmin');
 // make route to edit data
 Route::get('/edit-mahasiswa/{id}', [MahasiswaController::class, 'edit'])->middleware('auth');
 Route::put('/edit-mahasiswa/{id}', [MahasiswaController::class, 'update'])->middleware('auth');
-
 // make route to delete data mahasiswa
 Route::delete('/data-mahasiswa/{id}', [MahasiswaController::class, 'destroy'])->middleware('auth','isAdmin');
+
+
+// make route to import data
+Route::post('/import-mahasiswa', [MahasiswaController::class, 'import'])->middleware('auth','isAdmin');
+
+
 
 // mahasiswa
 Route::get('/mahasiswa', function () {
@@ -99,6 +100,7 @@ Route::get('/edit-skripsi/{id}', [SkripsiController::class, 'edit'])->middleware
 Route::put('/edit-skripsi/{id}', [SkripsiController::class, 'update'])->middleware('auth','isMahasiswa');
 
 // dosen
+Route::get('/dosen-dashboard', [DosenController::class, 'dosenDashboard'])->middleware('auth', 'isDosen');
 Route::get('/dosen', [DosenController::class, 'index'])->middleware('auth', 'isDosen');
 Route::get('/dosen/{id}', [DosenController::class, 'show'])->middleware('auth', 'isDosen');
 // make route to changeStatus
@@ -108,4 +110,6 @@ Route::get('/data-skripsi', [DosenController::class, 'dataSkripsi'])->middleware
 
 // departemen
 Route::get('/departemen', [DosenController::class, 'dep'])->middleware('auth', 'isDep');
-Route::get('/departemen/{id}', [DosenController::class, 'show'])->middleware('auth', 'isDep');
+Route::get('/departemen/{id}', [DosenController::class, 'depDetail'])->middleware('auth', 'isDep');
+// make route to dashboard
+Route::get('/departemen-dashboard', [DosenController::class, 'depDashboard'])->middleware('auth', 'isDep');

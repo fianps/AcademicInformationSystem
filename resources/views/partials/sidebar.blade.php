@@ -1,4 +1,4 @@
-<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+{{-- <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
     <div class="position-sticky pt-3 sidebar-sticky">
       <ul class="nav flex-column">
         <li class="nav-item">
@@ -20,4 +20,19 @@
         <button type="submit" class="btn btn-danger">Logout</button>
     </form>
     </div>
-</nav>
+</nav> --}}
+
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-inner slimscroll">
+    <div id="sidebar-menu" class="sidebar-menu">
+      <ul>
+        <li class="{{ ($title === 'PPL' || $title === 'Edit Profil') ? 'active' : '' }}">
+          <a href="/"><i class="far fa-user"></i> <span>Profile</span></a>
+        </li>
+        <li class="{{ ($title === 'Data Mahasiswa' || $title === 'Edit Data Mahasiswa' || $title === 'Tambah Data Mahasiswa') ? 'active' : '' }}">
+          <a href="/data-mahasiswa"><i class="far fa-file"></i> <span>Data Mahasiswa</span></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

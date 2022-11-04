@@ -1,48 +1,61 @@
 @extends('mahasiswa/layouts/main')
 
 @section('container')
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 ">
-          <div class="text-start">
-              <h3 class="h3">{{ auth()->user()->name }}</h3>
-              <p class="m-0">Mahasiswa</p>
+<div class="page-wrapper">
+    <div class="content container-fluid">
+      <div class="page-header mt-5">
+        <div class="row">
+          <div class="col">
+            <h3 class="page-title">KHS</h3>
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/mahasiswa">home</a></li>
+              <li class="breadcrumb-item active">KHS</li>
+            </ul>
           </div>
         </div>
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card mb-4">
-                  <div class="card-body">
-                      <div class="mb-3">
-                          <label for="semester" class="form-label">Semester Aktif</label>
-                          <p type="text" class="form-control border-0" id="semester" name="semester">{{ $khs->semester }}</p>
-                      </div>
-                      <div class="mb-3">
-                          <label for="sks_smt" class="form-label">SKS Semester</label>
-                          <p type="text" class="form-control border-0" id="sks_smt" name="sks_smt">{{ $khs->sks_smt }}</p>
-                      </div>
-                      <div class="mb-3">
-                          <label for="sks_total" class="form-label">SKS Kumulatif</label>
-                          <p type="text" class="form-control border-0" id="sks_total" name="sks_total">{{ $khs->sks_total }}</p>
-                      </div>
-                      <div class="mb-3">
-                          <label for="ips" class="form-label">IP Semester</label>
-                          <p type="text" class="form-control border-0" id="ips" name="ips">{{ $khs->ips }}</p>
-                      </div>
-                      <div class="mb-3">
-                          <label for="ipk" class="form-label">IP Kumulatif</label>
-                          <p type="text" class="form-control border-0" id="ipk" name="ipk">{{ $khs->ipk }}</p>
-                      </div>
-                      <div class="mb-3">
-                          <label for="file_khs" class="form-label">Scan KHS</label>
-                          <a href="storage/khs/{{$khs->file_khs}}" target="_blank" style="text-decoration: none" class="form-control border-0 text-primary">Cek File KHS</a>
-                      </div>
-                      <a href="/edit-khs/{{ $khs->id }}" class="btn btn-primary">Change</a>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tab-content profile-tab-cont">
+            <div class="tab-pane fade show active">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title d-flex justify-content-between">
+                    <span>KHS Details</span>
+                    <a class="edit-link" href="/edit-khs/{{ $khs->id }}"><i class="fa fa-edit mr-1"></i>Edit</a>
+                  </h5>
+                  <div class="row mt-5">
+                    <p class="col-sm-2 text-sm-right mb-0 mb-sm-2">Active Semester</p>
+                    <p class="col-sm-9">{{$khs->semester}}</p>
                   </div>
+                  <div class="row">
+                    <p class="col-sm-2 text-sm-right mb-0 mb-sm-2">SKS Semester</p>
+                    <p class="col-sm-9">{{$khs->sks_smt}}</p>
+                  </div>
+                  <div class="row">
+                    <p class="col-sm-2 text-sm-right mb-0 mb-sm-2">SKS Kumulatif</p>
+                    <p class="col-sm-9">{{$khs->sks_total}}</p>
+                  </div>
+                  <div class="row">
+                    <p class="col-sm-2 text-sm-right mb-0 mb-sm-2">IP Semester</p>
+                    <p class="col-sm-9">{{$khs->ips}}</p>
+                  </div>
+                  <div class="row">
+                    <p class="col-sm-2 text-sm-right mb-0 mb-sm-2">IP Kumulatif</p>
+                    <p class="col-sm-9">{{$khs->ipk}}</p>
+                  </div>
+                  <div class="row">
+                    <p class="col-sm-2 text-sm-right mb-0 mb-sm-2">Attachment</p>
+                    <a href="storage/khs/{{$khs->file_khs}}" target="_blank" class="col-sm-9">Check here</a>
+                  </div>
+                </div>
               </div>
             </div>
+          </div>
         </div>
-    </main>
+      </div>
+    </div>
+  </div>
 @endsection
         
 

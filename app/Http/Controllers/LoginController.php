@@ -34,7 +34,7 @@ class LoginController extends Controller
             } else if (auth()->user()->role == 'dosen'){
                 return redirect('/dosen')->content('dosen.dosen');
             } else if (auth()->user()->role == 'departemen'){
-                return redirect('/departemen')->content('departemen.departemen');
+                return redirect('/departemen-dashboard')->content('departemen.dashboard');
             }
         }
 

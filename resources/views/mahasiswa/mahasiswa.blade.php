@@ -1,52 +1,61 @@
 @extends('mahasiswa/layouts/main')
 
 @section('container')
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 ">
-          <div class="text-start">
-              <h3 class="h3">{{ auth()->user()->name }}</h3>
-              <p class="m-0">Mahasiswa</p>
-          </div>
+<div class="page-wrapper">
+  <div class="content container-fluid">
+    <div class="page-header mt-5">
+      <div class="row">
+        <div class="col">
+          <h3 class="page-title">Profile</h3>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/mahasiswa">home</a></li>
+            <li class="breadcrumb-item active">Profile</li>
+          </ul>
         </div>
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card mb-4">
-                  <div class="card-body">
-                      {{-- @foreach($operators as $operator) --}}
-                        {{-- @if ($mahasiswa->nama == auth()->user()->name) --}}
-                          <div class="mb-3">
-                              <label for="nama" class="form-label">Nama</label>
-                              <p type="text" class="form-control border-0" id="nama" name="nama">{{ $mahasiswa->nama }}</p>
-                          </div>
-                          <div class="mb-3">
-                              <label for="nim" class="form-label">NIM</label>
-                              <p type="nim" class="form-control border-0" id="nim" name="nim">{{ $mahasiswa->nim }}</p>
-                          </div>
-                          <div class="mb-3">
-                              <label for="angkatan" class="form-label">Angkatan</label>
-                              <p type="angkatan" class="form-control border-0" id="angkatan" name="angkatan">{{ $mahasiswa->angkatan }}</p>
-                          </div>
-                          <div class="mb-3">
-                              <label for="no_hp" class="form-label">No. Telepon</label>
-                              <p type="no_hp" class="form-control border-0" id="no_hp" name="no_hp">{{ $mahasiswa->no_hp }}</p>
-                          </div>
-                          <div class="mb-3">
-                              <label for="email" class="form-label">Email</label>
-                              <p type="email" class="form-control border-0" id="email" name="email">{{ $mahasiswa->email }}</p>
-                          </div>
-                          <div class="mb-3">
-                              <label for="alamat" class="form-label">Alamat</label>
-                              <p type="alamat" class="form-control border-0" id="alamat" name="alamat">{{ $mahasiswa->alamat }}</p>
-                          </div>
-                        {{-- @endif --}}
-                      {{-- @endforeach --}}
-                      <a href="/edit-profilmhs/{{ $mahasiswa->id }}" class="btn btn-primary">Edit</a>
-                  </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tab-content profile-tab-cont">
+          <div class="tab-pane fade show active">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title d-flex justify-content-between">
+                  <span>Personal Details</span>
+                  <a class="edit-link" href="/edit-profilmhs/{{ $mahasiswa->id }}"><i class="fa fa-edit mr-1"></i>Edit</a>
+                </h5>
+                <div class="row mt-5">
+                  <p class="col-sm-2 text-sm-right mb-0 mb-sm-2">Name</p>
+                  <p class="col-sm-9">{{$mahasiswa->nama}}</p>
+                </div>
+                <div class="row">
+                  <p class="col-sm-2 text-sm-right mb-0 mb-sm-2">NIM</p>
+                  <p class="col-sm-9">{{$mahasiswa->nim}}</p>
+                </div>
+                <div class="row">
+                  <p class="col-sm-2 text-sm-right mb-0 mb-sm-2">Year</p>
+                  <p class="col-sm-9">{{$mahasiswa->angkatan}}</p>
+                </div>
+                <div class="row">
+                  <p class="col-sm-2 text-sm-right mb-0 mb-sm-2">Email</p>
+                  <p class="col-sm-9">{{$mahasiswa->email}}</p>
+                </div>
+                <div class="row">
+                  <p class="col-sm-2 text-sm-right mb-0 mb-sm-2">Telephone</p>
+                  <p class="col-sm-9">{{$mahasiswa->no_hp}}</p>
+                </div>
+                <div class="row">
+                  <p class="col-sm-2 text-sm-right mb-0 mb-sm-2">Address</p>
+                  <p class="col-sm-9">{{$mahasiswa->alamat}}</p>
+                </div>
               </div>
             </div>
+          </div>
         </div>
-    </main>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
         
 
