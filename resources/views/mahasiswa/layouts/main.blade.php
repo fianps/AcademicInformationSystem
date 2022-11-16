@@ -28,7 +28,11 @@
         <ul class="nav user-menu">
           <li class="nav-item dropdown has-arrow">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-              <span class="user-img"><img class="rounded-circle" src="{{ asset('assets/img/profiles/user-avatar.png') }}" width="31" alt="Avatar" /></span>
+              @if (Auth::user()->photo == null)
+                <span class="user-img"><img class="rounded-circle" src="{{ asset('assets/img/profiles/user-avatar.png') }}" width="31" alt="Avatar" /></span>  
+              @else
+                <span class="user-img"><img class="rounded-circle" src="{{ asset('img/photo/'.Auth::user()->photo) }}" width="31" alt="Avatar" /></span>
+              @endif
             </a>
             <div class="dropdown-menu">
               <div class="user-header">

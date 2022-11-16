@@ -7,27 +7,27 @@
       <div class="row">
         <div class="col">
           <h3 class="page-title">Data Mahasiswa</h3>
-          <button class="btn btn-primary float-right veiwbutton" onclick="import()">Import Data</button>
-          {{--make pop up page for import data--}}
-          <div class="modal fade" id="import">
+          {{--make button for popup form--}}
+          <button type="button" class="btn btn-primary float-right veiwbutton" data-toggle="modal" data-target="#exampleModal">
+            Import Data
+          </button>
+          {{--make popup form for import data--}}
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
             <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">Import Data</h5>
-                  <button type="button" class="close">
-                    <span>&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  {{-- <form action="/import-mahasiswa" method="POST" enctype="multipart/form-data"> --}}
-                    @csrf
+              <div class="modal-content clearfix">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true"></span>
+                </button>
+                <form action="/import-data-mhs" method="POST" enctype="multipart/form-data">
+                  @csrf
+                  <div class="modal-body">
+                    <h5 class="title" id="exampleModalLabel">Import Data</h5>
                     <div class="form-group">
-                      <label for="file">File</label>
-                      <input type="file" name="file" class="form-control" required="required">
+                      <input type="file" name="file" class="form-control" id="file" required>
                     </div>
-                    <button type="submit" class="btn btn-success">Import Data</button>
-                  {{-- </form> --}}
-                </div>
+                    <button type="submit" class="btn btn-primary">Import</button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>

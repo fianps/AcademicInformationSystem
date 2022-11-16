@@ -138,29 +138,6 @@ class DosenController extends Controller
         // make x and y axis for chart
         $x = array_keys($data);
         $y = array_values($data);
-
-        // // make variable for line-chart with x-axis is angkatan and y-axis is jumlah mahasiswa
-        // $angkatan = DB::table('mahasiswas')
-        //     ->select(DB::raw('angkatan, count(*) as jumlah'))
-        //     ->groupBy('angkatan')
-        //     ->get();
-        // $angkatan = json_decode($angkatan, true);
-        // $angkatan = array_column($angkatan, 'angkatan');
-
-        // $jumlah = DB::table('mahasiswas')
-        //     ->select(DB::raw('angkatan, count(*) as jumlah'))
-        //     ->groupBy('angkatan')
-        //     ->get();
-        // $jumlah = json_decode($jumlah, true);
-        // $jumlah = array_column($jumlah, 'jumlah');
-
-        // // join angkatan and jumlah
-        // $angkatan_jumlah = array_combine($angkatan, $jumlah);
-
-        // $total = Mahasiswa::select(DB::raw('count(*) as total'))
-        // ->groupBy('status')->pluck('total');
-        // $tahun = Mahasiswa::select(DB::raw('angkatan as tahun'))
-        // ->groupBy('angkatan')->pluck('tahun');
         
         return view('departemen.dashboard',[
             'title' => 'Dashboard',
@@ -174,20 +151,21 @@ class DosenController extends Controller
             'jumlah' => $y,
         ]);
     }
+
     public function dosenDashboard()
     {
-        // make chart for sum of mahasiswa by angkatan
-        $data = DB::table('mahasiswas')
+        // make dataChart for sum of mahasiswa by angkatan
+        $dataChart = DB::table('mahasiswas')
             ->select(DB::raw('angkatan, count(*) as total'))
             ->groupBy('angkatan')
             ->get();
-        $data = json_decode($data, true);
-        $data = array_column($data, 'total', 'angkatan');
+        $dataChart = json_decode($dataChart, true);
+        $dataChart = array_column($dataChart, 'total', 'angkatan');
 
         // make x and y axis for chart
-        $x = array_keys($data);
-        $y = array_values($data);
-        
+        $x = array_keys($dataChart);
+        $y = array_values($dataChart);
+
         return view('dosen.dashboard',[
             'title' => 'Dashboard',
             'mahasiswas' => Mahasiswa::all(),
@@ -195,7 +173,7 @@ class DosenController extends Controller
             'totalLulus' => Skripsi::where('status', 'Lulus')->count(),
             'totalProses' => Skripsi::where('status', 'Proses')->count(),
             'totalPKL' => PKL::where('status', 'Proses')->count(),
-            'grafik' => $data,
+            'grafik' => $dataChart,
             'angkatan' => $x,
             'jumlah' => $y,
         ]);

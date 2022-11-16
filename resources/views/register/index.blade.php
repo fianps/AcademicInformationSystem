@@ -3,7 +3,8 @@
 @section('container')
 <div class="login-right-wrap">
   <h1 class="mb-3">Register</h1>
-  <form action="login.html">
+  <form action="/register" method="POST">
+    @csrf
     <div class="form-group">
       <input type="text" name="name" class="form-control " id="name" placeholder="name" required value="{{ old('name') }}"> </div>
     <div class="form-group">

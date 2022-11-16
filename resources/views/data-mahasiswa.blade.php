@@ -37,8 +37,8 @@
                     <tr>
                       <td>
                         <h2 class="table-avatar">
-                          <a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ asset('assets/img/profiles/user-avatar.png') }}" alt="User Image"></a>
-                          <a href="#">{{$mahasiswa->nama}} <span>{{$mahasiswa->no_hp}}</span></a>
+                          <a href="/edit-mahasiswa/{{$mahasiswa->id}}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ asset('assets/img/profiles/user-avatar.png') }}" alt="User Image"></a>
+                          <a href="/edit-mahasiswa/{{$mahasiswa->id}}">{{$mahasiswa->nama}} <span>{{$mahasiswa->no_hp}}</span></a>
                         </h2>
                       </td>
                       <td>{{$mahasiswa->nim}}</td>

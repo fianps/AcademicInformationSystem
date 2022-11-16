@@ -54,6 +54,8 @@ Route::get('/data-mahasiswa', [MahasiswaController::class, 'index'])->middleware
 Route::get('/tambah-data-mhs', [MahasiswaController::class, 'create'])->middleware('auth','isAdmin');
 // make route to create new data
 Route::put('/tambah-data-mhs', [MahasiswaController::class, 'store'])->middleware('auth','isAdmin');
+// make route to import data
+Route::post('/import-data-mhs', [MahasiswaController::class, 'import'])->middleware('auth','isAdmin');
 // make route to edit data
 Route::get('/edit-mahasiswa/{id}', [MahasiswaController::class, 'edit'])->middleware('auth');
 Route::put('/edit-mahasiswa/{id}', [MahasiswaController::class, 'update'])->middleware('auth');

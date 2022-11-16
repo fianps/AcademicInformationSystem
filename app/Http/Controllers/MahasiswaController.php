@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\IRS;
-use App\Models\KHS;
-use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Mahasiswa;
-use App\Models\PKL;
-use App\Models\Skripsi;
+use Illuminate\Http\Request;
+use App\Imports\MahasiswaImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MahasiswaController extends Controller
 {
@@ -109,6 +108,8 @@ class MahasiswaController extends Controller
             'mahasiswa' => $mahasiswa
         ]);
     }
+    
+    // make update function for data photo in user table and data angkatan, no_hp, alamat in mahasiswa table
     public function updateMhs(Request $request, $id)
     {
         // make variable to get mahasiswa data
@@ -127,7 +128,6 @@ class MahasiswaController extends Controller
 
         // save data to database
         $mahasiswa->save();
-
         // redirect to data-mahasiswa page
         return redirect('/mahasiswa')->with('success', 'Data Mahasiswa Berhasil Diubah!');
     }
@@ -146,22 +146,16 @@ class MahasiswaController extends Controller
         return redirect('/data-mahasiswa')->with('success', 'Data Mahasiswa Berhasil Dihapus!');
     }
 
-    // make function to import data mahasiswa to database
-    // public function import(Request $request)
-    // {
-    //     // make variable to get file
-    //     $file = $request->file('file');
-
-    //     // make variable to get file name
-    //     $nama_file = rand() . $file->getClientOriginalName();
-
-    //     // make variable to get file extension
-    //     $file->move('file_mahasiswa', $nama_file);
-
-    //     // import data
-    //     Excel::import(new MahasiswaImport, public_path('/file_mahasiswa/' . $nama_file));
-
-    //     // redirect to data-mahasiswa page
-    //     return redirect('/data-mahasiswa')->with('success', 'Data Mahasiswa Berhasil Diimport!');
-    // }
+    //function to import extel to database
+    public function import(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+        $file = $request->file('file');
+        $nama_file = rand() . $file->getClientOriginalName();
+        $file->move('file_mahasiswa', $nama_file);
+        Excel::import(new MahasiswaImport, public_path('/file_mahasiswa/' . $nama_file));
+        return redirect('/data-mahasiswa')->with('success', 'Data Mahasiswa Berhasil Diimport!');
+    }
 }
