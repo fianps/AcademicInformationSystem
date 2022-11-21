@@ -38,11 +38,11 @@ class MahasiswaController extends Controller
         // validate data
         $validatedData = $request->validate([
             'nama' => 'required',
-            'nim' => 'required|min:5|max:20',
+            'nim' => 'required|min:5|max:20|numeric',
             'email' => 'required|email:dns|unique:users',
-            'no_hp' => 'required',
+            'no_hp' => 'required|numeric',
             'alamat' => 'required',
-            'angkatan' => 'required',
+            'angkatan' => 'required|numeric',
             'status' => 'required',
         ]);
 
@@ -83,14 +83,12 @@ class MahasiswaController extends Controller
 
         // make variable to get request data
         $request->validate([
-            'no_hp' => 'required',
+            'no_hp' => 'required|numeric',
             'alamat' => 'required',
-            'angkatan' => 'required',
         ]);
 
         $mahasiswa->no_hp = $request->no_hp;
         $mahasiswa->alamat = $request->alamat;
-        $mahasiswa->angkatan = $request->angkatan;
 
         // save data to database
         $mahasiswa->save();
@@ -117,14 +115,12 @@ class MahasiswaController extends Controller
 
         // make variable to get request data
         $request->validate([
-            'no_hp' => 'required',
+            'no_hp' => 'required|numeric',
             'alamat' => 'required',
-            'angkatan' => 'required',
         ]);
 
         $mahasiswa->no_hp = $request->no_hp;
         $mahasiswa->alamat = $request->alamat;
-        $mahasiswa->angkatan = $request->angkatan;
 
         // save data to database
         $mahasiswa->save();

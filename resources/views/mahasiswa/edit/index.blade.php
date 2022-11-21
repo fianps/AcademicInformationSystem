@@ -40,7 +40,7 @@
                       </div>
                       <div class="form-group">
                         <label>Year</label>
-                        <input type="text" class="form-control" id="angkatan" name="angkatan" placeholder="{{ $mahasiswa->angkatan }}" />
+                        <input disabled type="text" class="form-control" id="angkatan" name="angkatan" value="{{ $mahasiswa->angkatan }}" />
                       </div>
                       <div class="form-group">
                         <label>Telephone</label>
