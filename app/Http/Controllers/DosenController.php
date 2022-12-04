@@ -9,6 +9,7 @@ use App\Models\PKL;
 use App\Models\Skripsi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class DosenController extends Controller
 {
@@ -127,17 +128,18 @@ class DosenController extends Controller
     // make function to build dashboard departemen
     public function depDashboard()
     {
-        // make chart for sum of mahasiswa by angkatan
-        $data = DB::table('mahasiswas')
-            ->select(DB::raw('angkatan, count(*) as total'))
-            ->groupBy('angkatan')
+        $tes2 = DB::table('mahasiswas')
+            ->select(
+                DB::raw('angkatan'),
+                DB::raw('COUNT(*) as jumlah'),
+                DB::raw('SUM(status="Belum Disetujui") as tolak')
+            )
+            ->groupBy(DB::raw('angkatan'))
             ->get();
-        $data = json_decode($data, true);
-        $data = array_column($data, 'total', 'angkatan');
-
-        // make x and y axis for chart
-        $x = array_keys($data);
-        $y = array_values($data);
+        $result2[] = ['Year','Approved','Rejected'];
+        foreach ($tes2 as $key => $value) {
+            $result2[++$key] = [$value->angkatan,(int)$value->jumlah,(int)$value->tolak];
+        }
         
         return view('departemen.dashboard',[
             'title' => 'Dashboard',
@@ -146,25 +148,30 @@ class DosenController extends Controller
             'totalLulus' => Skripsi::where('status', 'Lulus')->count(),
             'totalProses' => Skripsi::where('status', 'Proses')->count(),
             'totalPKL' => PKL::where('status', 'Proses')->count(),
-            'grafik' => $data,
-            'angkatan' => $x,
-            'jumlah' => $y,
-        ]);
+        ])->with('result2',$result2);
     }
 
     public function dosenDashboard()
     {
-        // make dataChart for sum of mahasiswa by angkatan
-        $dataChart = DB::table('mahasiswas')
-            ->select(DB::raw('angkatan, count(*) as total'))
-            ->groupBy('angkatan')
+        $tes = Mahasiswa::where('kode_wali', auth()->user()->kode_wali)
+            ->select(
+                DB::raw('angkatan'),
+                DB::raw('COUNT(*) as jumlah'),
+                DB::raw('SUM(status="Belum Disetujui") as tolak')
+            )
+            ->groupBy(DB::raw('angkatan'))
             ->get();
-        $dataChart = json_decode($dataChart, true);
-        $dataChart = array_column($dataChart, 'total', 'angkatan');
+        $result[] = ['Year','Approved','Rejected'];
+        foreach ($tes as $key => $value) {
+            $result[++$key] = [$value->angkatan,(int)$value->jumlah,(int)$value->tolak];
+        }
 
-        // make x and y axis for chart
-        $x = array_keys($dataChart);
-        $y = array_values($dataChart);
+        // $stat = DB::select(DB::raw('SELECT SUM(p_k_l_s.status="Belum") as PKL, SUM(skripsis.status="Belum Ambil") as Skripsi, SUM(skripsis.status="Lulus") as Lulus, SUM(p_k_l_s.status="Proses") as "Sedang PKL", SUM(p_k_l_s.status="Lulus") as "Telah PKL" FROM p_k_l_s INNER JOIN mahasiswas ON p_k_l_s.email=mahasiswas.email INNER JOIN skripsis ON skripsis.email=mahasiswas.email'));
+        // $result2[] = ['Status','Total'];
+        // $stat_key[] = ['Belum PKL','Belum Skripsi','Lulus','Sedang PKL','Telah PKL'];
+        // foreach ($stat as $key => $value) {
+        //     $result2[++$key]
+        // }
 
         return view('dosen.dashboard',[
             'title' => 'Dashboard',
@@ -173,9 +180,6 @@ class DosenController extends Controller
             'totalLulus' => Skripsi::where('status', 'Lulus')->count(),
             'totalProses' => Skripsi::where('status', 'Proses')->count(),
             'totalPKL' => PKL::where('status', 'Proses')->count(),
-            'grafik' => $dataChart,
-            'angkatan' => $x,
-            'jumlah' => $y,
-        ]);
+        ])->with('result',$result);
     }
 }

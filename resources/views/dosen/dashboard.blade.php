@@ -97,7 +97,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12 col-lg-6">
+      <div class="col-lg-12">
         <div class="card card-chart">
           <div class="card-header">
             <h4 class="card-title">Students of Each Batch</h4>
@@ -107,17 +107,51 @@
           </div>
         </div>
       </div>
-      <div class="col-md-12 col-lg-6">
+      <!-- <div class="col-md-12 col-lg-6">
         <div class="card card-chart">
           <div class="card-header">
             <h4 class="card-title">Students Status</h4>
           </div>
           <div class="card-body">
-            <div id="donut-chart"></div>
+            <div id="piechart"></div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  var result = @json($result);
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable(result);
+    var options = {
+      curveType: 'function',
+      legend: { position: 'bottom' }
+    };
+    var chart = new google.visualization.LineChart(document.getElementById('line-chart'));
+    chart.draw(data, options);
+  }
+
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(pieChart);
+  function pieChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Task', 'Hours per Day'],
+      ['Work',     11],
+      ['Eat',      2],
+      ['Commute',  2],
+      ['Watch TV', 2],
+      ['Sleep',    7]
+    ]);
+    var options = {
+      
+    };
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    chart.draw(data, options);
+  }
+</script>
+
 @endsection

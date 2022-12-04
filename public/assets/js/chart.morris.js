@@ -1,3 +1,5 @@
+const { fromPairs } = require("lodash");
+
 $(document).ready(function () {
     lineChart();
     donutChart();
@@ -8,27 +10,27 @@ $(document).ready(function () {
         window.pieChart.redraw();
     });
 });
-function lineChart() {
-    window.lineChart = Morris.Line({
-        element: "line-chart",
-        data: [
-            { y: "2016", a: 100, b: 90 },
-            { y: "2017", a: 100, b: 90 },
-            { y: "2018", a: 75, b: 65 },
-            { y: "2019", a: 50, b: 40 },
-            { y: "2020", a: 75, b: 65 },
-            { y: "2021", a: 50, b: 40 },
-            { y: "2022", a: 75, b: 65 },
-        ],
-        xkey: "y",
-        ykeys: ["a", "b"],
-        labels: "Active",
-        lineColors: ["#009688", "#cdc6c6"],
-        lineWidth: "3px",
-        resize: true,
-        redraw: true,
-    });
-}
+// function lineChart() {
+//     window.lineChart = Morris.Line({
+//         element: "line-chart",
+//         data: [
+//             { y: "2016", a: 100, b: 90 },
+//             { y: "2017", a: 100, b: 90 },
+//             { y: "2018", a: 75, b: 65 },
+//             { y: "2019", a: 50, b: 40 },
+//             { y: "2020", a: 75, b: 65 },
+//             { y: "2021", a: 50, b: 40 },
+//             { y: "2022", a: 75, b: 65 },
+//         ],
+//         xkey: "y",
+//         ykeys: ["a", "b"],
+//         labels: "Active",
+//         lineColors: ["#009688", "#cdc6c6"],
+//         lineWidth: "3px",
+//         resize: true,
+//         redraw: true,
+//     });
+// }
 function donutChart() {
     window.donutChart = Morris.Donut({
         element: "donut-chart",

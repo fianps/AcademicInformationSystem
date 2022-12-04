@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use App\Imports\MahasiswaImport;
-use Maatwebsite\Excel\Facades\Excel;
+use Excel;
 
 class MahasiswaController extends Controller
 {
@@ -145,7 +145,7 @@ class MahasiswaController extends Controller
     //function to import extel to database
     public function import(Request $request)
     {
-        $this->validate($request, [
+        $request->validate([
             'file' => 'required|mimes:csv,xls,xlsx'
         ]);
         $file = $request->file('file');
