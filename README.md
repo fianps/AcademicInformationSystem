@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="public/assets/img/profiles/logo.png" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="public/assets/img/profiles/logo.png" width="300" alt="Laravel Logo"></a></p>
 
 ## About Academic Information System
 
